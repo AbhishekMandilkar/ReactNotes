@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Header from "./components/Header";
+import NewNote from "./components/NewNote";
+import NotesContainer from "./components/NotesContainer";
+import { store } from "./app/store";
+import { Provider } from "react-redux";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div className="App w-screen h-screen bg-slate-100 dark:bg-neutral-800">
+        <div className="w-full px-4 lg:px-0 lg:w-3/12  mx-auto h-screen">
+          <Header />
+          <NewNote />
+          <NotesContainer />
+        </div>
+      </div>
+    </Provider>
   );
 }
 
