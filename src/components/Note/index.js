@@ -3,6 +3,8 @@ import Button from "../../molecules/Button";
 import { useDispatch } from "react-redux";
 import { deleteNote, updateNote } from "../../features/notes/noteSlice";
 import clipText from "../../helper/clipText";
+import { motion } from "framer-motion";
+
 function Note({ content, id }) {
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
@@ -21,7 +23,19 @@ function Note({ content, id }) {
     }
   }, [editMode]);
   return (
-    <div className="my-4 bg-white rounded-md p-4 flex drop-shadow-md dark:bg-neutral-600">
+    <motion.div
+      style={{ x: 0 }}
+      key={id}
+      animate={{ y: 0, x: 0, opacity: 1, transitionDuration: 0.4 }}
+      initial={{ y: -20, opacity: 0.5 }}
+      exit={{
+        scale: 0,
+        y: -20,
+        opacity: 0,
+        transitionDuration: 0.8,
+      }}
+      className="my-4 bg-white rounded-md p-4 flex drop-shadow-md dark:bg-neutral-600"
+    >
       {editMode ? (
         <>
           <input
@@ -40,7 +54,7 @@ function Note({ content, id }) {
           <Button deleteNote handleClick={() => handleDelete()} />
         </>
       )}
-    </div>
+    </motion.div>
   );
 }
 
